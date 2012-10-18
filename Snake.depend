@@ -2,3 +2,12 @@
 1350073215 source:c:\users\luke\documents\github\snake\main.cpp
 	<iostream>
 
+1350532778 source:c:\users\mike\documents\class\cs i\snake\plotter.cpp
+	<iostream>
+	"plotter.h"
+
+1350532778 c:\users\mike\documents\class\cs i\snake\plotter.h
+	<windows.h>
+	<mmsystem.h>
+	<conio.h>
+

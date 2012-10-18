@@ -20,7 +20,8 @@ game's platform. These variations involve the modification of certain rules
 e.g. the lethality of contact with walls.
 Due Date: 11/26/12
 Date Created: 10/12/12
-Date Last Modified: 10/12/12
+Date Last Modified: 10/17/12
+Last modified by: Mike Riess
 
 Data Abstraction:
 Input:
@@ -36,9 +37,13 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    cout << "Hello Snake!" << endl;
 
     //INSERT SNAKE HERE
+    cout << "                 __" << endl;
+    cout << "     _______    /*_>-<" << endl;
+    cout << " ___/ _____ \\__/ /" << endl;
+    cout << "<____/     \\____/" << endl;
 
     return 0;
 }
