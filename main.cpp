@@ -20,7 +20,7 @@ game's platform. These variations involve the modification of certain rules
 e.g. the lethality of contact with walls.
 Due Date: 11/26/12
 Date Created: 10/12/12
-Date Last Modified: 10/17/12
+Date Last Modified: 10/25/12
 Last modified by: Mike Riess
 
 Data Abstraction:
