@@ -16,4 +16,12 @@ void loadscreen();
 */
 void mainmenu();
 
+/*  user menu
+
+    Description: Prints user menu options and listens for which
+        functions to call
+
+*/
+void usermenu(std::string username);
+
 #endif // MENU_H_INCLUDED
