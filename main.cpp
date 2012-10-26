@@ -32,18 +32,15 @@ Assumptions:
 
 #include <iostream>
 #include "plotter.h"
+#include "menu.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello Snake!" << endl;
 
-    //INSERT SNAKE HERE
-    cout << "                 __" << endl;
-    cout << "     _______    /*_>-<" << endl;
-    cout << " ___/ _____ \\__/ /" << endl;
-    cout << "<____/     \\____/" << endl;
+    // launch loading screen
+    loadscreen();
 
     return 0;
 }

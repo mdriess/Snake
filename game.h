@@ -33,15 +33,15 @@ Assumptions:
 #ifndef _GAME_H
 #define _GAME_H
 #include "plotter.h"
-#include "user.h"
+//#include "user.h"
 
 class Game
 {
     private:
         Plotter screen;
-    
+
     public:
-        void playGame(User&);
+//        void playGame(User&);
 };
 
 #endif

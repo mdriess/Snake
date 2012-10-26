@@ -33,9 +33,11 @@ Assumptions:
 #include <iostream>
 #include "plotter.h"
 #include "game.h"
-#include "user.h"
+#include "menu.h"
+//#include "user.h"
 
-void Game::playGame(User& user)
+/* void Game::playGame(User& user)
 {
      screen.plot(10,10,'!');
 }
+*/
