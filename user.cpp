@@ -5,6 +5,9 @@
 #include "plotter.h"
 #include <fstream>
 #include <cstdlib>
+#define char BACK = 8;
+#define char ENTER = 13;
+
 
 using namespace std;
 
@@ -49,20 +52,20 @@ void printLogin(int type){
 
                 c = getch();
 
-                if(c == 8 && pw.size() > 0){
+                if(c == BACK && pw.size() > 0){
 
                     pw = pw.substr(0,pw.size()-1);
                     cx -= 1;
                     screen.move(cx,cy);
 
-                }else if (c != 13){
+                }else if (c != ENTER){
 
                     cout << "*";
                     pw += c;
 
                 };
 
-            } while (c != 13);
+            } while (c != ENTER);
 
         };
 
@@ -145,48 +148,71 @@ int login(string username, string pw, int type){
 
 }
 
-std::string hintLookup(std::string username){
 
-    string pwhint;
-    string filename;
 
-    // attempt to open user file
-    filename = "users\\" + username + ".usr";
 
-    ifstream userFile;
 
-    userFile.open(filename.c_str());
 
-    getline(userFile, pwhint); // skips first line of user file
-    getline(userFile, pwhint);
 
-    userFile.clear();
-    userFile.close();
+User::User(string n)
+{
+    name=n;
+    ifstream file;
+    file.open(("users\\"+name+".user").c_str());
+    getline(file,pwd);
+    file>>score;
+    file.close();
+}
 
-    return pwhint;
+User::~User()
+{
+    ofstream file;
+    file.open(("users\\"+name+".user").c_str());
+    file<<pwd;
+    file<<score;
+    file.close();
+}
+
+string User::getName()
+{
+    return name;
+}
+
+bool User::checkPass(string s)
+{
+    return pwd.compare(s) == 0;
+}
+
+bool User::changePass(string oldP,string newP)
+{
+    bool ret=false;
+
+    if(checkPass(oldP))
+    {
+        pwd=newP;
+        ret=true;
+    }
+    return ret;
+}
+
+int User::getScore()
+{
+    return score;
+}
+
+bool User::setScore(int i)
+{
+    bool ret=false;
+    if(i>score)
+    {
+        score=i;
+        ret=true;
+    }
+    return ret;
 
 }
 
-double highScore(std::string username){
-
-    double score;
-    string filename;
-    string junk;
-
-    // attempt to open user file
-    filename = "users\\" + username + ".usr";
-
-    ifstream userFile;
-
-    userFile.open(filename.c_str());
-
-    getline(userFile, junk); //
-    getline(userFile, junk); // skips first two lines of user file
-    userFile >> score;
-
-    userFile.clear();
-    userFile.close();
-
-    return score;
-
+string User::getHint()
+{
+    return hint;
 }

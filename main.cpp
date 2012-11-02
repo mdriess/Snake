@@ -40,7 +40,9 @@ int main()
 {
 
     // launch loading screen
-    loadscreen();
+    char c=getch();
+    cout << c;
+    //loadscreen();
 
     return 0;
 }
