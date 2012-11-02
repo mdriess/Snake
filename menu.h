@@ -1,5 +1,7 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
+#include "plotter.h"
+#include "user.h"
 
 /*  loading screen
 
@@ -14,7 +16,7 @@ void loadscreen();
         functions to call
 
 */
-void mainmenu();
+void mainmenu(Plotter&);
 
 /*  user menu
 
@@ -22,6 +24,6 @@ void mainmenu();
         functions to call
 
 */
-void usermenu(std::string username);
+void usermenu(User& username);
 
 #endif // MENU_H_INCLUDED

@@ -52,7 +52,7 @@ class User{
         bool changePass(string,string);
         int getScore();
         bool setScore(int);
-        string getHint();
+        //string getHint();
 };
 
 #endif // USER_H_INCLUDED

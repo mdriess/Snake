@@ -5,8 +5,8 @@
 #include "plotter.h"
 #include <fstream>
 #include <cstdlib>
-#define char BACK = 8;
-#define char ENTER = 13;
+#define BACK 8
+#define ENTER 13
 
 
 using namespace std;
@@ -20,14 +20,12 @@ void printLogin(int type){
     int cx, cy;
     char c;
 
-    cx = 0;
-    cy = 0;
+    cx = 10;
+    cy = 3;
 
     Plotter screen;
 
     screen.clear();
-
-    screen.move(cx,cy);
 
     do{
 
@@ -57,11 +55,14 @@ void printLogin(int type){
                     pw = pw.substr(0,pw.size()-1);
                     cx -= 1;
                     screen.move(cx,cy);
+                    cout << " ";
+                    screen.move(cx,cy);
 
-                }else if (c != ENTER){
+                }else if (c != ENTER && c != BACK){
 
                     cout << "*";
                     pw += c;
+                    cx += 1;
 
                 };
 
@@ -75,13 +76,19 @@ void printLogin(int type){
 
             case 0: screen.clear();
                     cout << "ERROR: User doesn't exist." << endl;
+                    cy = 5;
+                    cx = 10;
+                    pw = "";
                     cout << endl;
             break;
-            case 1: usermenu(username);
+            case 1: //usermenu(username);
+                    cout << "login successful" << endl;
             break;
             case 2: screen.clear();
                     cout << "ERROR: Username and password don't match." << endl;
                     cout << "Password hint: " << hintLookup(username) << endl;
+                    cy = 6;
+                    cx = 10;
                     cout << endl;
 
                     pw = "";
@@ -148,11 +155,27 @@ int login(string username, string pw, int type){
 
 }
 
+std::string hintLookup(std::string username){
 
+    string pwhint;
+    string filename;
 
+    // attempt to open user file
+    filename = "users\\" + username + ".usr";
 
+    ifstream userFile;
 
+    userFile.open(filename.c_str());
 
+    getline(userFile, pwhint); // skips first line of user file
+    getline(userFile, pwhint);
+
+    userFile.clear();
+    userFile.close();
+
+    return pwhint;
+
+}
 
 User::User(string n)
 {
@@ -211,8 +234,9 @@ bool User::setScore(int i)
     return ret;
 
 }
-
+/*
 string User::getHint()
 {
     return hint;
 }
+*/

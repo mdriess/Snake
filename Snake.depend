@@ -11,14 +11,16 @@
 	<mmsystem.h>
 	<conio.h>
 
-1351221649 source:c:\users\mike\documents\class\cs i\snake\main.cpp
+1351884745 source:c:\users\mike\documents\class\cs i\snake\main.cpp
 	<iostream>
 	"plotter.h"
 	"menu.h"
 
-1351218682 c:\users\mike\documents\class\cs i\snake\menu.h
+1351884086 c:\users\mike\documents\class\cs i\snake\menu.h
+	"plotter.h"
+	"user.h"
 
-1351222409 source:c:\users\mike\documents\class\cs i\snake\menu.cpp
+1351883961 source:c:\users\mike\documents\class\cs i\snake\menu.cpp
 	<iostream>
 	"menu.h"
 	"plotter.h"
@@ -34,7 +36,7 @@
 1351201993 c:\users\mike\documents\class\cs i\snake\game.h
 	"plotter.h"
 
-1351225602 source:c:\users\mike\documents\class\cs i\snake\user.cpp
+1351886450 source:c:\users\mike\documents\class\cs i\snake\user.cpp
 	<iostream>
 	"user.h"
 	"menu.h"
@@ -43,7 +45,8 @@
 	<fstream>
 	<cstdlib>
 
-1351224274 c:\users\mike\documents\class\cs i\snake\user.h
+1351885349 c:\users\mike\documents\class\cs i\snake\user.h
+	<string>
 
 1351266086 source:c:\users\luke\documents\github\snake\menu.cpp
 	<iostream>

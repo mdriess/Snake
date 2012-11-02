@@ -27,7 +27,7 @@ void loadscreen(){
 
     }while (!getch());
 
-    mainmenu();
+    mainmenu(screen);
 
     // clear screen using plotter
 
@@ -35,11 +35,11 @@ void loadscreen(){
 
 }
 
-void mainmenu(){
+void mainmenu(Plotter& screen){
 
-    int ans;
+    char ans;
 
-    Plotter screen;
+    //Plotter screen;
 
     screen.clear();
 
@@ -58,7 +58,7 @@ void mainmenu(){
     cout << "Please enter the number of your selection: ";
 
     ans = getch();
-    cout << static_cast<char>(ans) << endl;
+    cout << ans << endl;
 
     while(ans != '1' && ans != '2' && ans != '3' && ans != '4' && ans != '5'
           && ans != '6' && ans != '9'
@@ -67,7 +67,7 @@ void mainmenu(){
         cout << "ERROR: Invalid selection. Please try again." << endl;
 
         ans = getch();
-        cout << static_cast<char>(ans) << endl;
+        cout << ans << endl;
 
     }
 
@@ -93,7 +93,7 @@ void mainmenu(){
 
 }
 
-void usermenu(std::string username){
+void usermenu(User& username){
 
     Plotter screen;
 
@@ -101,8 +101,8 @@ void usermenu(std::string username){
 
     int ans;
 
-    cout << "Welcome, " << username << "!  ";
-    cout << "Your high score: " << highScore(username) << endl;
+    cout << "Welcome, " << username.getName() << "!  ";
+    cout << "Your high score: " << username.getScore() << endl;
     cout << endl;
 
     cout << "=== USER MENU ===" << endl;
@@ -139,7 +139,7 @@ void usermenu(std::string username){
         break;
         case '4': cout << "Load settings";
         break;
-        case '9': mainmenu();
+        case '9': mainmenu(screen);
 
     }
 
