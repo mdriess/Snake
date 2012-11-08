@@ -1,41 +1,38 @@
-#include <iostream>
 #include "point.h"
 
-using namespace std;
-
-Point::Point(int x, int y)
+Point::Point(int a, int b)
 {
-    x_pos  = x;
-    y_pos  = y;
+    x = a;
+    y = b;
 }
 
-Point::Point(Point *p)
+Point::Point()
 {
-    x_pos = p->getX();
-    y_pos = p->getY();
-}
-
-void Point::setX(int x)
-{
-    x_pos = x;
-}
-
-void Point::setY(int y)
-{
-    y_pos = y;
+    x = 0;
+    y = 0;
 }
 
 int Point::getX()
 {
-    return x_pos;
+    return x;
 }
 
 int Point::getY()
 {
-    return y_pos;
+    return y;
 }
 
-bool Point::equals(Point *p)
+void Point::setX(int n)
 {
-    return x_pos == p->getX() && y_pos == p->getY();
+    x = n;
+}
+
+void Point::setY(int n)
+{
+    y = n;
+}
+
+bool Point::equals(Point p)
+{
+    return x == p.getX() && y == p.getY();
 }

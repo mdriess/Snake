@@ -4,20 +4,20 @@
 class Point
 {
     private:
-        int  x_pos;
-        int  y_pos;
+       int x;
+       int y;
     
     public:
-        Point(int = 0, int = 0);
-        Point(Point*);
-
-        void setX(int);
-        void setY(int);
-
-        int  getX();
-        int  getY();
-        
-        bool equals(Point *p);
+       Point(int, int);
+       Point();
+       
+       int getX();
+       int getY();
+       
+       void setX(int);
+       void setY(int);
+       
+       bool equals(Point p);
 };
 
 #endif

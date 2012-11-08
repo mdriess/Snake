@@ -1,150 +1,143 @@
 #include "snake.h"
 
-using namespace std;
-
 Snake::Snake()
 {
-    head = new Node();
-    tail = head;
-    
+    body[0] = Node();
     length = 1;
-    dir = EAST;
+    direction = EAST;
 }
 
-Snake::Snake(Node* t)
+Snake::Snake(ifstream& file)
 {
-    head = new Node(t);
-    tail = head;
+    int x, y, dir;
     
-    length = 1;
-    dir = EAST;
-}  
+    file >> length;
+    if(length > CAPACITY)
+    {
+        length = CAPACITY;
+    }
+    
+    file >> dir;
+    direction = Direction(dir);
+    
+    for(int i = 0 ; i < length ; i++)
+    {
+        file >> x >> y;
+        body[i] = Node(Point(x,y));
+    }
+}
+
+void Snake::grow()
+{
+    if(length < CAPACITY)
+    {
+        length++;
+    }
+}
 
 void Snake::move()
 {
-     moveBody();
-     moveHead();
+    moveBody();
+    moveHead();
 }
 
 void Snake::moveBody()
 {
-    Node* tmp = tail;
-       
-    while(tmp->getNext() != NULL)
+    for(int i = length-1 ; i > 0 ; i--)
     {
-        tmp->setPoint(tmp->getNext()->getPoint());
-        tmp->setSym(tmp->getNext()->getSym());
-        
-        tmp = tmp->getNext();
+        body[i] = body[i-1];
     }
 }
 
 void Snake::moveHead()
 {
-    Point *p = head->getPoint();
-    switch(dir)
+    Point location = body[0].getLocation();
+    int x = location.getX(), y = location.getY();
+    
+    switch(direction)
     {
-        case NORTH:
-             p->setY(p->getY()-1);
-             break;
-        case SOUTH:
-             p->setY(p->getY()+1);
-             break;
-        case EAST:
-             p->setX(p->getX()+1);
-             break;
-        case WEST:
-             p->setX(p->getX()-1);
-             break;
-    }
-    head->setPoint(p);
-}
-
-bool Snake::draw(Plotter plotter)
-{
-    bool ret;
-    
-    ret = drawBody(plotter);
-    drawHead(plotter);
-    
-    return ret;
-}
-
-bool Snake::drawBody(Plotter plotter)
-{
-    bool ret  = true;
-    Node *tmp = tail;
-    
-    while(tmp->getNext() != NULL)
-    {
-        plotter.plot(tmp->getPoint()->getX(),tmp->getPoint()->getY(),tmp->getSym());
+        case NORTH: location.setY(y-1); 
+                    break;
+                    
+        case SOUTH: location.setY(y+1);
+                    break;
         
-        if(tmp->equals(head))
+        case EAST:  location.setX(x+1);
+                    break;
+        
+        case WEST:  location.setX(x-1);
+                    break;
+    }
+    
+    body[0].setLocation(location);
+}
+
+void Snake::draw(Plotter p)
+{
+    Point location;
+    
+    for(int i = 0 ; i < length ; i++)
+    {
+        location = body[i].getLocation();
+        p.plot(location.getX() , location.getY() , body[i].getSymbol());
+    }
+}
+
+bool Snake::hit(int vert_low, int vert_up, int horz_low, int horz_up)
+{
+    return hitItself() || hitWall(vert_low , vert_up , horz_low , horz_up);
+}
+
+bool Snake::hitItself()
+{
+    bool ret = false; 
+     
+    Point location = body[0].getLocation();
+    for(int i = 1 ; i < length ; i++)
+    {
+        if(body[i].getLocation().equals(location))
         {
-            ret = false;
+            ret = true;
         }
-        
-        tmp = tmp->getNext();
     }
     
     return ret;
 }
 
-void Snake::drawHead(Plotter plotter)
+bool Snake::hitWall(int vert_low, int vert_up, int horz_low, int horz_up)
 {
-    Point *p = head->getPoint();
-    plotter.plot(p->getX(),p->getY(),head->getSym());
-}
-              
-void Snake::grow()
-{
-    if(length == 1)
+    bool  ret = false;
+    Point location = body[0].getLocation();
+    
+    if(location.getY() < vert_low)
     {
-        tail = new Node(head);
-        tail->setNext(head);
+        ret = true;
     }
-    else
+    if(location.getY() > vert_up)
     {
-        Node *tmp;
-        tmp = new Node(tail);
-        tmp->setNext(tail);
-        tail = tmp;
+        ret = true;
+    }
+    if(location.getX() < horz_low)
+    {
+        ret = true;
+    }
+    if(location.getX() > horz_up)
+    {
+        ret = true;
     }
     
-    length++;
+    return ret;
 }
 
-void Snake::add(Node *n)
+Point Snake::getLocation()
 {
-    if(length == 1)
+    return body[0].getLocation();
+}
+
+void Snake::setDirection(Direction d)
+{
+    if(direction % 2 != d % 2)
     {
-        n->setNext(head);
+        direction = d;
     }
-    else
-    {
-        n->setNext(tail);
-    }
-    tail = n;
-    
-    length++;
-}
-
-int Snake::getLength()
-{
-    return length;
-}
-
-Node* Snake::getTail()
-{
-    return tail;
-}
-
-Node* Snake::getHead()
-{
-    return head;
-}
-               
-void Snake::setDir(direction d)
-{
-    dir = d;
 }

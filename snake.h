@@ -1,37 +1,39 @@
 #ifndef _SNAKE_HEADER
 #define _SNAKE_HEADER
+
+#include <fstream>
 #include "plotter.h"
 #include "node.h"
+using namespace std;
+
+enum  Direction {NORTH, EAST, SOUTH, WEST};
+
+const int CAPACITY = 1000;
 
 class Snake
 {
-    public:
-        enum  direction {NORTH, SOUTH, EAST, WEST};
-      
-    private:
-        Node  *tail, *head;
-        int   length;
-        direction dir;
-      
-    public:
-        Snake();
-        Snake(Node*);
     
-        void move();
-        void moveBody();
-        void moveHead();
-        bool draw(Plotter);
-        bool drawBody(Plotter);
-        void drawHead(Plotter);
+    private:
+       Node  body[CAPACITY];
+       Direction direction;
+       int length;
+    
+    public:
+       Snake();
+       Snake(ifstream&);
        
-        void grow();
-        void add(Node* n);
+       void grow();
+       void move();
+       void moveBody();
+       void moveHead();
+       void draw(Plotter);
        
-        int   getLength();
-        Node* getTail();
-        Node* getHead();
+       bool hit(int vert_low, int vert_up, int horz_low, int horz_up);
+       bool hitItself();
+       bool hitWall(int vert_low, int vert_up, int horz_low, int horz_up);
        
-        void setDir(direction d);
+       Point getLocation();
+       void  setDirection(Direction);
 };
 
 #endif

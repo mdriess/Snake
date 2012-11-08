@@ -1,59 +1,39 @@
 #include "node.h"
+#include "plotter.h"
 
-using namespace std;
+Node::Node(Point p)
+{
+    location = p;
+    symbol = SQUARE;
+}
 
 Node::Node()
 {
-    point = new Point();
+    location = Point();
     symbol = SQUARE;
-    next   = NULL;
 }
 
-Node::Node(Point *p, char sym)
+Point Node::getLocation()
 {
-    point  = p;
-    symbol = sym;
-    next   = NULL;
+    return location;
 }
 
-Node::Node(Node* n)
+char Node::getSymbol()
 {
-    point  = new Point(n->getPoint());
-    symbol = n->getSym();
-    next   = n;
+     return symbol;
 }
 
-void Node::setNext(Node* n)
+void Node::setLocation(Point p)
 {
-    next = n;
+     location = p;
 }
 
-void Node::setPoint(Point *p)
+void Node::setSymbol(char c)
 {
-    point = new Point(p);
+     symbol = c;
 }
 
-void Node::setSym(char sym)
+bool Node::equals(Node n)
 {
-    symbol = sym;
-}
-
-Node* Node::getNext()
-{
-    return next;
-}
-
-Point* Node::getPoint()
-{
-    return point;
-}
-
-char Node::getSym()
-{
-    return symbol;
-}
-
-bool Node::equals(Node *n)
-{
-    return point->equals(n->getPoint());
+     return location.equals(n.getLocation());
 }
