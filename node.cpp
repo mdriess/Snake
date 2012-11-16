@@ -37,3 +37,8 @@ bool Node::equals(Node n)
 {
      return location.equals(n.getLocation());
 }
+
+void Node::draw(Plotter p)
+{
+    p.plot(location.getX() , location.getY() , symbol);
+}

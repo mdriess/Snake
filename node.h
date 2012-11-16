@@ -2,6 +2,7 @@
 #define _NODE_HEADER
 
 #include "point.h"
+#include "plotter.h"
 
 class Node
 {     
@@ -20,6 +21,8 @@ class Node
        void setSymbol(char);
        
        bool equals(Node);
+       
+       void draw(Plotter);
 };
 
 #endif

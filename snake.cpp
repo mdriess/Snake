@@ -2,7 +2,7 @@
 
 Snake::Snake()
 {
-    body[0] = Node();
+    body[0] = Node(Point(1,2));
     length = 1;
     direction = EAST;
 }
@@ -72,20 +72,23 @@ void Snake::moveHead()
     body[0].setLocation(location);
 }
 
-void Snake::draw(Plotter p)
+void Snake::clear(Plotter p)
 {
-    Point location;
+    Point tail_loc = body[length-1].getLocation();
     
-    for(int i = 0 ; i < length ; i++)
-    {
-        location = body[i].getLocation();
-        p.plot(location.getX() , location.getY() , body[i].getSymbol());
-    }
+    p.plot(tail_loc.getX(), tail_loc.getY(), ' ');
 }
 
-bool Snake::hit(int vert_low, int vert_up, int horz_low, int horz_up)
+void Snake::draw(Plotter p)
 {
-    return hitItself() || hitWall(vert_low , vert_up , horz_low , horz_up);
+    Point head_loc = body[0].getLocation();
+    
+    p.plot(head_loc.getX(), head_loc.getY(), SQUARE);
+}
+
+bool Snake::hit(int x_min, int x_max, int y_min, int y_max)
+{
+    return hitItself() || hitWall(x_min , x_max , y_min , y_max);
 }
 
 bool Snake::hitItself()
@@ -104,24 +107,24 @@ bool Snake::hitItself()
     return ret;
 }
 
-bool Snake::hitWall(int vert_low, int vert_up, int horz_low, int horz_up)
+bool Snake::hitWall(int x_min, int x_max, int y_min, int y_max)
 {
     bool  ret = false;
     Point location = body[0].getLocation();
     
-    if(location.getY() < vert_low)
+    if(location.getX() <= x_min)
     {
         ret = true;
     }
-    if(location.getY() > vert_up)
+    if(location.getX() >= x_max)
     {
         ret = true;
     }
-    if(location.getX() < horz_low)
+    if(location.getY() <= y_min)
     {
         ret = true;
     }
-    if(location.getX() > horz_up)
+    if(location.getY() >= y_max)
     {
         ret = true;
     }
@@ -129,9 +132,34 @@ bool Snake::hitWall(int vert_low, int vert_up, int horz_low, int horz_up)
     return ret;
 }
 
+bool Snake::hitNode(Node n)
+{
+    bool ret = false; 
+     
+    for(int i = 0 ; i < length ; i++)
+    {
+        if(body[i].equals(n))
+        {
+            ret = true;
+        }
+    }
+    
+    return ret;
+}
+
+int Snake::getLength()
+{
+    return length;
+}
+
 Point Snake::getLocation()
 {
     return body[0].getLocation();
+}
+
+Node Snake::getHead()
+{
+    return body[0];
 }
 
 void Snake::setDirection(Direction d)
@@ -140,4 +168,9 @@ void Snake::setDirection(Direction d)
     {
         direction = d;
     }
+}
+
+Direction Snake::getDirection()
+{
+    return direction;
 }

@@ -177,6 +177,16 @@ std::string hintLookup(std::string username){
 
 }
 
+User::User()
+{
+    name = "guest";
+    ifstream file;
+    file.open(("users\\"+name+".user").c_str());
+    getline(file,pwd);
+    file>>score;
+    file.close();
+}
+
 User::User(string n)
 {
     name=n;

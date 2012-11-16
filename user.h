@@ -44,6 +44,7 @@ class User{
     string hint;
     int score;
     public:
+        User();
         User(string , string);//used for new account
         User(string);//used for existing account
         ~User();
