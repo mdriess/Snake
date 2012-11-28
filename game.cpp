@@ -164,3 +164,8 @@ void Game::updateUser()
     usermenu(screen,user);
 }
 
+void Game::endgame()
+{
+
+}
+
