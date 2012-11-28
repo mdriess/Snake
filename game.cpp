@@ -3,46 +3,49 @@
 Game::Game()
 {
     generateFood();
-    
+
+    user= User();
     dead   = false;
     paused = false;
-    
+
     score = 1;
     speed = 0;
 }
 
-Game::Game(User u)
+Game::Game(User& u)
 {
     generateFood();
-    
+
     user = u;
-    
+
     dead   = false;
     paused = false;
-    
+
     score = 1;
     speed = 0;
 }
 
 void Game::playGame()
-{   
+{
+    resizeConsole(x_max+1,y_max+1);//game size
+    screen.clear();
     drawBoundary();
-    
+
     while(!dead)
-    {   
+    {
         displayScore();
-        
+
         if(!paused)
-        {        
+        {
             snake.clear(screen);
             snake.move();
             snake.draw(screen);
-        
+
             food.draw(screen);
-            
+
             Sleep(100-speed);
-        
-        
+
+
             if(snake.hit(x_min,x_max,y_min,y_max))
             {
                 dead = true;
@@ -53,15 +56,15 @@ void Game::playGame()
                 generateFood();
                 harder();
             }
-        }        
-        
+        }
+
         if(kbhit())
         {
             getKeys();
         }
-        
+
     }
-    
+    //endgame();
     updateUser();
 }
 
@@ -94,13 +97,13 @@ void Game::drawLine(int x, int y, int length, bool vert)
 void Game::generateFood()
 {
     srand(time(0));
-    
+
     int dx = x_max - x_min - 2;
     int dy = y_max - y_min - 2;
-    
+
     int x = rand() % dx + x_min + 1;
     int y = rand() % dy + y_min + 1;
-    
+
     food = Node(Point(x,y));
 }
 
@@ -118,15 +121,15 @@ void Game::displayScore()
 void Game::getKeys()
 {
     char c = getch();
-    
+
     switch(c)
     {
         case 112: paused = true;
                   break;
         case 115: paused = false;
-                  break; 
+                  break;
     }
-     
+
     if(c == -32) switch(getch())
     {
         case 72: if(snake.getDirection() % 2 != 0)
@@ -142,7 +145,7 @@ void Game::getKeys()
                      snake.setDirection(SOUTH);
                  break;
     }
-    
+
 }
 
 void Game::harder()
@@ -157,4 +160,7 @@ void Game::harder()
 void Game::updateUser()
 {
     user.setScore(score);
+    resizeConsole();
+    usermenu(screen,user);
 }
+

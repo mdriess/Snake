@@ -2,28 +2,26 @@
 #define MENU_H_INCLUDED
 #include "plotter.h"
 #include "user.h"
+#define BACK 8
+#define ENTER 13
+#define ESC 27
+#define UP 72
+#define DOWN 80
 
-/*  loading screen
-
-    Description: Prints loading screen until keypress
-
-*/
 void loadscreen();
-
-/*  main menu
-
-    Description: Prints menu options and listens for which
-        functions to call
-
-*/
 void mainmenu(Plotter&);
+void usermenu(Plotter& ,User& );
+int menu(Plotter&screen, string title, string ary[],int size);
+void userLogin(Plotter&);
+int login(string, string);
+string hintLookup(string);
+int highScore(string);
+void changePassword(Plotter&, User&);
+void userSettings(Plotter&,User&);
+void highScoreList(Plotter&);
+void createAccount(Plotter&);
+string enterPassword(Plotter&,int&,int&);
+void resizeConsole(int = 25,int = 25);
 
-/*  user menu
-
-    Description: Prints user menu options and listens for which
-        functions to call
-
-*/
-void usermenu(User& username);
 
 #endif // MENU_H_INCLUDED

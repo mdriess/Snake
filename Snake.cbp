@@ -37,8 +37,16 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="menu.cpp" />
 		<Unit filename="menu.h" />
+		<Unit filename="node.cpp" />
+		<Unit filename="node.h" />
 		<Unit filename="plotter.cpp" />
 		<Unit filename="plotter.h" />
+		<Unit filename="point.cpp" />
+		<Unit filename="point.h" />
+		<Unit filename="score.cpp" />
+		<Unit filename="score.h" />
+		<Unit filename="snake.cpp" />
+		<Unit filename="snake.h" />
 		<Unit filename="user.cpp" />
 		<Unit filename="user.h" />
 		<Extensions>
